@@ -1,2 +1,2 @@
-# Pr-ctica-de-qu-mica
+tarea de quimica
 1era Práctica de química IMF_unmsm 
