@@ -1,0 +1,157 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/CristianJimenezPacheco/Pr-ctica-de-qu-mica/blob/main/tarea%20de%20qu%C3%ADmica%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "\n",
+        "# Constantes\n",
+        "k = 1.38e-23  # Constante de Boltzmann (J/K)\n",
+        "m_cl2 = 70.906  # Masa molar del cloro (g/mol)\n",
+        "m_n2 = 28.0134  # Masa molar del nitrógeno (g/mol)\n",
+        "m_he = 4.002602  # Masa molar del helio (g/mol)\n",
+        "\n",
+        "# Calcular velocidades rms\n",
+        "v_rms_cl2 = np.sqrt(3 * k * 300 / (m_cl2 / 6.022e23))\n",
+        "v_rms_n2 = np.sqrt(3 * k * 300 / (m_n2 / 6.022e23))\n",
+        "v_rms_he = np.sqrt(3 * k * 300 / (m_he / 6.022e23))\n",
+        "\n",
+        "# Crear DataFrame\n",
+        "df = pd.DataFrame({\n",
+        "    'Molécula': ['Cl2', 'N2', 'He'],\n",
+        "    'Velocidad cuadrática media (m/s)': [v_rms_cl2, v_rms_n2, v_rms_he]\n",
+        "})\n",
+        "\n",
+        "# Imprimir DataFrame\n",
+        "print(df)\n",
+        "\n",
+        "# Calcular medidas de tendencia central\n",
+        "media = df['Velocidad cuadrática media (m/s)'].mean()\n",
+        "mediana = df['Velocidad cuadrática media (m/s)'].median()\n",
+        "\n",
+        "# Imprimir medidas de tendencia central\n",
+        "print(f'Media: {media} m/s')\n",
+        "print(f'Mediana: {mediana} m/s')"
+      ],
+      "metadata": {
+        "id": "z9VYAidDAS3Y",
+        "outputId": "da2862f6-2d6f-43b6-de92-6367ff53a8ba",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "  Molécula  Velocidad cuadrática media (m/s)\n",
+            "0      Cl2                         10.270455\n",
+            "1       N2                         16.339857\n",
+            "2       He                         43.227485\n",
+            "Media: 23.279265796617988 m/s\n",
+            "Mediana: 16.339857406052197 m/s\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "from tabulate import tabulate\n",
+        "\n",
+        "\n",
+        "N = 6.022e23\n",
+        "m = 0.028\n",
+        "k = 1.38e-23\n",
+        "T = [100, 300, 700]\n",
+        "\n",
+        "\n",
+        "temperaturas = []\n",
+        "velocidades_rms = []\n",
+        "\n",
+        "\n",
+        "for temp in T:\n",
+        "    v_rms = np.sqrt((3 * k * temp) / (m / N))\n",
+        "    temperaturas.append(temp)\n",
+        "    velocidades_rms.append(v_rms)\n",
+        "\n",
+        "\n",
+        "df = pd.DataFrame({\n",
+        "    'Temperatura (K)': temperaturas,\n",
+        "    'Velocidad cuadrática media (m/s)': velocidades_rms\n",
+        "})\n",
+        "\n",
+        "\n",
+        "table = tabulate(df, headers='keys', tablefmt='grid')\n",
+        "\n",
+        "\n",
+        "print(table)\n",
+        "\n",
+        "\n",
+        "media = df['Velocidad cuadrática media (m/s)'].mean()\n",
+        "mediana = df['Velocidad cuadrática media (m/s)'].median()\n",
+        "\n",
+        "\n",
+        "print(f'\\nMedia de la velocidad cuadrática media: {media} m/s')\n",
+        "print(f'Mediana de la velocidad cuadrática media: {mediana} m/s')"
+      ],
+      "metadata": {
+        "id": "wtYw6DCrBSyb",
+        "outputId": "03fc5075-d3e9-4a91-c79f-be97e360f277",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "+----+-------------------+------------------------------------+\n",
+            "|    |   Temperatura (K) |   Velocidad cuadrática media (m/s) |\n",
+            "+====+===================+====================================+\n",
+            "|  0 |               100 |                            298.395 |\n",
+            "+----+-------------------+------------------------------------+\n",
+            "|  1 |               300 |                            516.835 |\n",
+            "+----+-------------------+------------------------------------+\n",
+            "|  2 |               700 |                            789.479 |\n",
+            "+----+-------------------+------------------------------------+\n",
+            "\n",
+            "Media de la velocidad cuadrática media: 534.9030739234113 m/s\n",
+            "Mediana de la velocidad cuadrática media: 516.835287384399 m/s\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Te damos la bienvenida a Colaboratory",
+      "toc_visible": true,
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
